@@ -268,21 +268,41 @@
       min-height: 110px;
     }
 
-    .prompt-line rt {
+    .prompt-line rt,
+    .blank-reading {
       font-size: 0.72rem;
       color: var(--blue);
       font-weight: 700;
     }
 
+    .blank-ruby {
+      display: inline-flex;
+      min-width: 3.4em;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.05em;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .blank-reading {
+      min-height: 1.1em;
+      line-height: 1.1;
+      -webkit-text-fill-color: var(--blue);
+    }
+
     .blank-target {
-      display: inline-block;
+      display: block;
       min-width: 3.2em;
       padding: 0 0.2em;
       color: transparent;
+      -webkit-text-fill-color: transparent;
       border-bottom: 4px solid var(--red);
       text-shadow: none;
       background: var(--red-soft);
       border-radius: 4px 4px 0 0;
+      line-height: 1.45;
     }
 
     .kanji-target {
@@ -1019,7 +1039,7 @@
     }
 
     function renderBlankSentence(item) {
-      return `${escapeHtml(item.prefix)}<ruby><span class="blank-target">${escapeHtml(item.target)}</span><rt>${escapeHtml(item.reading)}</rt></ruby>${escapeHtml(item.suffix)}`;
+      return `${escapeHtml(item.prefix)}<span class="blank-ruby"><span class="blank-reading">${escapeHtml(item.reading)}</span><span class="blank-target" aria-hidden="true">${escapeHtml(item.target)}</span></span>${escapeHtml(item.suffix)}`;
     }
 
     function renderKanjiSentence(item) {
