@@ -1,0 +1,1181 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>四・五月の漢字テスト対策</title>
+  <style>
+    :root {
+      --paper: #fbfbf8;
+      --panel: #ffffff;
+      --ink: #21242a;
+      --muted: #646b73;
+      --line: #d9dde3;
+      --strong-line: #aab2bd;
+      --red: #c9252d;
+      --red-soft: #fff0f0;
+      --green: #18705c;
+      --green-soft: #eaf7f2;
+      --blue: #245f86;
+      --blue-soft: #ecf5fb;
+      --gold: #986b10;
+      --gold-soft: #fff7dc;
+      --shadow: 0 10px 30px rgba(18, 24, 33, 0.08);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(90deg, rgba(201, 37, 45, 0.05) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(36, 95, 134, 0.04) 1px, transparent 1px),
+        var(--paper);
+      background-size: 34px 34px;
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    button {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      cursor: pointer;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
+    }
+
+    button:hover {
+      border-color: var(--strong-line);
+      box-shadow: 0 6px 16px rgba(18, 24, 33, 0.08);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid rgba(36, 95, 134, 0.24);
+      outline-offset: 2px;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .topbar-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      color: var(--red);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+      line-height: 1;
+      background: #fff;
+      box-shadow: inset 0 -5px 0 rgba(201, 37, 45, 0.1);
+      flex: 0 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.35rem;
+      line-height: 1.25;
+    }
+
+    .subtitle {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(86px, 1fr));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .mode-tab {
+      border: 0;
+      border-radius: 0;
+      min-height: 42px;
+      padding: 0 12px;
+      color: var(--muted);
+      box-shadow: none;
+      background: transparent;
+      white-space: nowrap;
+    }
+
+    .mode-tab + .mode-tab {
+      border-left: 1px solid var(--line);
+    }
+
+    .mode-tab[aria-pressed="true"] {
+      background: var(--ink);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .workspace {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.96);
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+    }
+
+    .main-pane {
+      padding: 22px;
+      border-right: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .side-pane {
+      padding: 22px;
+      background: #f7faf9;
+      min-width: 0;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(160px, 1fr) minmax(140px, 0.8fr) auto;
+      gap: 10px;
+      margin-bottom: 18px;
+      align-items: center;
+    }
+
+    select,
+    input[type="text"] {
+      min-height: 44px;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 0 12px;
+    }
+
+    .ghost-button {
+      padding: 0 14px;
+      background: #fff;
+    }
+
+    .question-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .question-stage {
+      min-height: 330px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(33, 36, 42, 0.06) 40px),
+        #fff;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+    }
+
+    .prompt-line {
+      font-size: 2rem;
+      line-height: 2.2;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+      text-align: center;
+      font-weight: 700;
+      min-height: 110px;
+    }
+
+    .prompt-line rt {
+      font-size: 0.72rem;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .blank-target {
+      display: inline-block;
+      min-width: 3.2em;
+      padding: 0 0.2em;
+      color: transparent;
+      border-bottom: 4px solid var(--red);
+      text-shadow: none;
+      background: var(--red-soft);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .kanji-target {
+      color: var(--red);
+      background: var(--red-soft);
+      border-bottom: 4px solid var(--red);
+      padding: 0 0.12em;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .option-button {
+      min-height: 76px;
+      padding: 10px 14px;
+      font-size: 1.7rem;
+      font-weight: 800;
+      background: #fff;
+      border-width: 2px;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .option-button.correct {
+      background: var(--green-soft);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .option-button.wrong {
+      background: var(--red-soft);
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .reading-form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .reading-input {
+      font-size: 1.4rem;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .primary-button {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+      padding: 0 20px;
+      font-weight: 700;
+    }
+
+    .next-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .feedback {
+      min-height: 52px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+    }
+
+    .feedback strong {
+      color: var(--ink);
+    }
+
+    .feedback.good {
+      border-color: rgba(24, 112, 92, 0.35);
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .feedback.bad {
+      border-color: rgba(201, 37, 45, 0.35);
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .progress-track {
+      height: 10px;
+      width: 100%;
+      border-radius: 999px;
+      background: #e6e9ed;
+      overflow: hidden;
+      margin: 0 0 18px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--red), var(--blue), var(--green));
+      transition: width 180ms ease;
+    }
+
+    .side-title {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+    }
+
+    .score-list {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .score-row strong {
+      color: var(--ink);
+      font-size: 1.1rem;
+    }
+
+    .mini-actions {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 20px;
+    }
+
+    .miss-list {
+      display: grid;
+      gap: 8px;
+      max-height: 330px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    .miss-item,
+    .study-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .miss-item {
+      font-size: 0.92rem;
+    }
+
+    .miss-item b {
+      color: var(--red);
+      font-size: 1.05rem;
+    }
+
+    .empty {
+      color: var(--muted);
+      border: 1px dashed var(--strong-line);
+      border-radius: 8px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.6);
+      text-align: center;
+    }
+
+    .completion {
+      text-align: center;
+      display: grid;
+      gap: 16px;
+      justify-items: center;
+      padding: 28px 0;
+    }
+
+    .completion h2 {
+      margin: 0;
+      font-size: 1.7rem;
+    }
+
+    .completion-score {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .study-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(150px, auto);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .study-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .study-item {
+      display: grid;
+      gap: 6px;
+    }
+
+    .study-main {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .study-word {
+      color: var(--red);
+      font-size: 1.4rem;
+      font-weight: 900;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .study-reading {
+      color: var(--blue);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .study-sentence {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 900px) {
+      .topbar-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .mode-tabs {
+        width: 100%;
+      }
+
+      .workspace {
+        grid-template-columns: 1fr;
+        border-left: 0;
+        border-right: 0;
+      }
+
+      .main-pane {
+        border-right: 0;
+      }
+
+      .side-pane {
+        border-top: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner,
+      .main-pane,
+      .side-pane {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .brand {
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: 1.15rem;
+      }
+
+      .subtitle {
+        font-size: 0.8rem;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        font-size: 1.35rem;
+      }
+
+      .mode-tabs {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .mode-tab {
+        padding: 0 7px;
+        font-size: 0.86rem;
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .question-stage {
+        min-height: 360px;
+        padding: 20px 14px;
+      }
+
+      .prompt-line {
+        font-size: 1.55rem;
+        line-height: 2.15;
+      }
+
+      .options-grid,
+      .study-list,
+      .reading-form,
+      .study-toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .option-button {
+        min-height: 64px;
+        font-size: 1.45rem;
+      }
+
+      .feedback {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">漢</div>
+          <div>
+            <h1>四・五月の漢字テスト対策</h1>
+            <p class="subtitle">全50問: 漢字4択・ふりがな入力・一覧</p>
+          </div>
+        </div>
+        <nav class="mode-tabs" aria-label="モード">
+          <button class="mode-tab" type="button" data-mode="choice" aria-pressed="true">漢字4択</button>
+          <button class="mode-tab" type="button" data-mode="reading" aria-pressed="false">ふりがな</button>
+          <button class="mode-tab" type="button" data-mode="study" aria-pressed="false">一覧</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="main-pane">
+        <div id="quizView">
+          <div class="controls">
+            <select id="rangeSelect" aria-label="出題範囲">
+              <option value="all">全50問</option>
+              <option value="single">1-13 単字</option>
+              <option value="compound">14-39 熟語・県名</option>
+              <option value="okuri">40-50 送りがな</option>
+              <option value="misses">ミスだけ</option>
+            </select>
+            <select id="orderSelect" aria-label="出題順">
+              <option value="shuffle">シャッフル</option>
+              <option value="source">プリント順</option>
+            </select>
+            <button class="ghost-button" id="restartButton" type="button">最初から</button>
+          </div>
+
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+
+          <div class="question-header">
+            <div class="tagline">
+              <span class="tag" id="modeTag">漢字4択</span>
+              <span class="tag" id="groupTag">全50問</span>
+            </div>
+            <div id="questionCounter">1 / 50</div>
+          </div>
+
+          <div class="question-stage" id="questionStage">
+            <div class="prompt-line" id="promptLine"></div>
+            <div id="choiceArea" class="options-grid"></div>
+            <form id="readingForm" class="reading-form hidden">
+              <input class="reading-input" id="readingInput" type="text" inputmode="kana" autocomplete="off" aria-label="ふりがな">
+              <button class="primary-button" type="submit">判定</button>
+            </form>
+            <div class="next-row">
+              <button class="ghost-button" id="nextButton" type="button">次へ</button>
+            </div>
+            <div class="feedback" id="feedback">
+              <span>問題を選んでください。</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="studyView" class="hidden">
+          <div class="study-toolbar">
+            <select id="studyRangeSelect" aria-label="一覧範囲">
+              <option value="all">全50問</option>
+              <option value="single">1-13 単字</option>
+              <option value="compound">14-39 熟語・県名</option>
+              <option value="okuri">40-50 送りがな</option>
+              <option value="misses">ミスだけ</option>
+            </select>
+            <button class="ghost-button" id="studyShuffleButton" type="button">ミニテストへ</button>
+          </div>
+          <div class="study-list" id="studyList"></div>
+        </div>
+      </section>
+
+      <aside class="side-pane">
+        <h2 class="side-title">スコア</h2>
+        <div class="score-list">
+          <div class="score-row"><span>正解</span><strong id="scoreCorrect">0</strong></div>
+          <div class="score-row"><span>解答済み</span><strong id="scoreAnswered">0</strong></div>
+          <div class="score-row"><span>出題数</span><strong id="scoreTotal">50</strong></div>
+          <div class="score-row"><span>ミス</span><strong id="scoreMisses">0</strong></div>
+        </div>
+        <div class="mini-actions">
+          <button class="ghost-button" id="missOnlyButton" type="button">ミスだけ練習</button>
+          <button class="ghost-button" id="clearMissesButton" type="button">ミスを消す</button>
+        </div>
+        <h2 class="side-title">ミス一覧</h2>
+        <div class="miss-list" id="missList"></div>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const KANJI_ITEMS = [
+      { id: 1, group: "single", target: "信", reading: "しん", prefix: "自", suffix: "をもつ。", label: "自信" },
+      { id: 2, group: "single", target: "達", reading: "たつ", prefix: "雨雲の発", suffix: "。", label: "発達" },
+      { id: 3, group: "single", target: "例", reading: "れい", prefix: "", suffix: "をあげる。", label: "例" },
+      { id: 4, group: "single", target: "順", reading: "じゅん", prefix: "五十音", suffix: "。", label: "五十音順" },
+      { id: 5, group: "single", target: "辞", reading: "じ", prefix: "", suffix: "書を使う。", label: "辞書" },
+      { id: 6, group: "single", target: "訓", reading: "くん", prefix: "", suffix: "読み。", label: "訓読み" },
+      { id: 7, group: "single", target: "印", reading: "いん", prefix: "", suffix: "象にのこる。", label: "印象" },
+      { id: 8, group: "single", target: "愛", reading: "あい", prefix: "", suffix: "読書。", label: "愛読書" },
+      { id: 9, group: "single", target: "城", reading: "しろ", prefix: "", suffix: "のれきし。", label: "城" },
+      { id: 10, group: "single", target: "景", reading: "けい", prefix: "美しい風", suffix: "。", label: "風景" },
+      { id: 11, group: "single", target: "府", reading: "ふ", prefix: "都道", suffix: "県", label: "都道府県" },
+      { id: 12, group: "single", target: "茨", reading: "いばら", prefix: "", suffix: "の道。", label: "茨の道" },
+      { id: 13, group: "single", target: "富", reading: "とみ", prefix: "", suffix: "をえる。", label: "富" },
+      { id: 14, group: "compound", target: "着席", reading: "ちゃくせき", prefix: "", suffix: "する", label: "着席" },
+      { id: 15, group: "compound", target: "野菜", reading: "やさい", prefix: "", suffix: "を食べる。", label: "野菜" },
+      { id: 16, group: "compound", target: "目標", reading: "もくひょう", prefix: "", suffix: "を立てる。", label: "目標" },
+      { id: 17, group: "compound", target: "方法", reading: "ほうほう", prefix: "", suffix: "をさがす。", label: "方法" },
+      { id: 18, group: "compound", target: "分類", reading: "ぶんるい", prefix: "", suffix: "する", label: "分類" },
+      { id: 19, group: "compound", target: "機械", reading: "きかい", prefix: "", suffix: "を使う。", label: "機械" },
+      { id: 20, group: "compound", target: "司会", reading: "しかい", prefix: "", suffix: "をする", label: "司会" },
+      { id: 21, group: "compound", target: "事典", reading: "じてん", prefix: "百科", suffix: "", label: "百科事典" },
+      { id: 22, group: "compound", target: "録音", reading: "ろくおん", prefix: "", suffix: "する", label: "録音" },
+      { id: 23, group: "compound", target: "成長", reading: "せいちょう", prefix: "子どもの", suffix: "。", label: "成長" },
+      { id: 24, group: "compound", target: "昨年", reading: "さくねん", prefix: "", suffix: "の話。", label: "昨年" },
+      { id: 25, group: "compound", target: "要点", reading: "ようてん", prefix: "話の", suffix: "。", label: "要点" },
+      { id: 26, group: "compound", target: "目的", reading: "もくてき", prefix: "運動する", suffix: "。", label: "目的" },
+      { id: 27, group: "compound", target: "栃木", reading: "とちぎ", prefix: "", suffix: "県", label: "栃木県" },
+      { id: 28, group: "compound", target: "埼玉", reading: "さいたま", prefix: "", suffix: "県", label: "埼玉県" },
+      { id: 29, group: "compound", target: "新潟", reading: "にいがた", prefix: "", suffix: "県", label: "新潟県" },
+      { id: 30, group: "compound", target: "福井", reading: "ふくい", prefix: "", suffix: "県", label: "福井県" },
+      { id: 31, group: "compound", target: "山梨", reading: "やまなし", prefix: "", suffix: "県", label: "山梨県" },
+      { id: 32, group: "compound", target: "岐阜", reading: "ぎふ", prefix: "", suffix: "県", label: "岐阜県" },
+      { id: 33, group: "compound", target: "岡山", reading: "おかやま", prefix: "", suffix: "県", label: "岡山県" },
+      { id: 34, group: "compound", target: "案内", reading: "あんない", prefix: "", suffix: "する", label: "案内" },
+      { id: 35, group: "compound", target: "説明", reading: "せつめい", prefix: "", suffix: "する", label: "説明" },
+      { id: 36, group: "compound", target: "観光", reading: "かんこう", prefix: "", suffix: "バス", label: "観光バス" },
+      { id: 37, group: "compound", target: "国旗", reading: "こっき", prefix: "", suffix: "をふる。", label: "国旗" },
+      { id: 38, group: "compound", target: "勝利", reading: "しょうり", prefix: "", suffix: "する", label: "勝利" },
+      { id: 39, group: "compound", target: "取材", reading: "しゅざい", prefix: "", suffix: "する", label: "取材" },
+      { id: 40, group: "okuri", target: "飛ばす", reading: "とばす", prefix: "紙ひこうきを", suffix: "。", label: "飛ばす" },
+      { id: 41, group: "okuri", target: "建てる", reading: "たてる", prefix: "ビルを", suffix: "。", label: "建てる" },
+      { id: 42, group: "okuri", target: "静か", reading: "しずか", prefix: "", suffix: "にする。", label: "静か" },
+      { id: 43, group: "okuri", target: "初めて", reading: "はじめて", prefix: "", suffix: "海へ行く。", label: "初めて" },
+      { id: 44, group: "okuri", target: "群れる", reading: "むれる", prefix: "魚が", suffix: "。", label: "群れる" },
+      { id: 45, group: "okuri", target: "必ず", reading: "かならず", prefix: "", suffix: "行く。", label: "必ず" },
+      { id: 46, group: "okuri", target: "量る", reading: "はかる", prefix: "米の重さを", suffix: "。", label: "量る" },
+      { id: 47, group: "okuri", target: "伝える", reading: "つたえる", prefix: "理由を", suffix: "。", label: "伝える" },
+      { id: 48, group: "okuri", target: "試みる", reading: "こころみる", prefix: "実けんを", suffix: "。", label: "試みる" },
+      { id: 49, group: "okuri", target: "選ぶ", reading: "えらぶ", prefix: "色を", suffix: "。", label: "選ぶ" },
+      { id: 50, group: "okuri", target: "関わる", reading: "かかわる", prefix: "子どもと", suffix: "。", label: "関わる" }
+    ];
+
+    const GROUP_LABELS = {
+      all: "全50問",
+      single: "単字",
+      compound: "熟語・県名",
+      okuri: "送りがな",
+      misses: "ミスだけ"
+    };
+
+    const state = {
+      mode: "choice",
+      range: "all",
+      order: "shuffle",
+      queue: [],
+      index: 0,
+      answered: 0,
+      correct: 0,
+      isAnswered: false,
+      currentOptions: [],
+      misses: new Set(loadMisses())
+    };
+
+    const els = {
+      quizView: document.getElementById("quizView"),
+      studyView: document.getElementById("studyView"),
+      rangeSelect: document.getElementById("rangeSelect"),
+      orderSelect: document.getElementById("orderSelect"),
+      restartButton: document.getElementById("restartButton"),
+      progressBar: document.getElementById("progressBar"),
+      modeTag: document.getElementById("modeTag"),
+      groupTag: document.getElementById("groupTag"),
+      questionCounter: document.getElementById("questionCounter"),
+      promptLine: document.getElementById("promptLine"),
+      choiceArea: document.getElementById("choiceArea"),
+      readingForm: document.getElementById("readingForm"),
+      readingInput: document.getElementById("readingInput"),
+      nextButton: document.getElementById("nextButton"),
+      feedback: document.getElementById("feedback"),
+      scoreCorrect: document.getElementById("scoreCorrect"),
+      scoreAnswered: document.getElementById("scoreAnswered"),
+      scoreTotal: document.getElementById("scoreTotal"),
+      scoreMisses: document.getElementById("scoreMisses"),
+      missList: document.getElementById("missList"),
+      missOnlyButton: document.getElementById("missOnlyButton"),
+      clearMissesButton: document.getElementById("clearMissesButton"),
+      studyRangeSelect: document.getElementById("studyRangeSelect"),
+      studyShuffleButton: document.getElementById("studyShuffleButton"),
+      studyList: document.getElementById("studyList")
+    };
+
+    document.querySelectorAll(".mode-tab").forEach((button) => {
+      button.addEventListener("click", () => setMode(button.dataset.mode));
+    });
+
+    els.rangeSelect.addEventListener("change", () => {
+      state.range = els.rangeSelect.value;
+      resetQuiz();
+    });
+
+    els.orderSelect.addEventListener("change", () => {
+      state.order = els.orderSelect.value;
+      resetQuiz();
+    });
+
+    els.restartButton.addEventListener("click", resetQuiz);
+
+    els.nextButton.addEventListener("click", () => {
+      if (state.index < state.queue.length) {
+        state.index += 1;
+      }
+      render();
+    });
+
+    els.readingForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      checkReading();
+    });
+
+    els.missOnlyButton.addEventListener("click", () => {
+      state.range = "misses";
+      els.rangeSelect.value = "misses";
+      resetQuiz();
+      setMode(state.mode === "study" ? "choice" : state.mode);
+    });
+
+    els.clearMissesButton.addEventListener("click", () => {
+      state.misses.clear();
+      saveMisses();
+      if (state.range === "misses") {
+        resetQuiz();
+      }
+      render();
+    });
+
+    els.studyRangeSelect.addEventListener("change", renderStudyList);
+
+    els.studyShuffleButton.addEventListener("click", () => {
+      state.range = els.studyRangeSelect.value;
+      els.rangeSelect.value = state.range;
+      state.order = "shuffle";
+      els.orderSelect.value = "shuffle";
+      setMode("choice");
+      resetQuiz();
+    });
+
+    function loadMisses() {
+      try {
+        return JSON.parse(localStorage.getItem("kanji-test-misses") || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveMisses() {
+      localStorage.setItem("kanji-test-misses", JSON.stringify([...state.misses]));
+    }
+
+    function getItemsForRange(range) {
+      if (range === "all") return [...KANJI_ITEMS];
+      if (range === "misses") return KANJI_ITEMS.filter((item) => state.misses.has(item.id));
+      return KANJI_ITEMS.filter((item) => item.group === range);
+    }
+
+    function resetQuiz() {
+      const items = getItemsForRange(state.range);
+      state.queue = state.order === "shuffle" ? shuffle(items) : [...items];
+      state.index = 0;
+      state.answered = 0;
+      state.correct = 0;
+      state.isAnswered = false;
+      state.currentOptions = [];
+      render();
+    }
+
+    function setMode(mode) {
+      state.mode = mode;
+      document.querySelectorAll(".mode-tab").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
+      });
+
+      if (mode === "study") {
+        els.quizView.classList.add("hidden");
+        els.studyView.classList.remove("hidden");
+        els.studyRangeSelect.value = state.range;
+        renderStudyList();
+      } else {
+        els.quizView.classList.remove("hidden");
+        els.studyView.classList.add("hidden");
+        resetQuiz();
+      }
+      updateScore();
+      renderMissList();
+    }
+
+    function render() {
+      updateScore();
+      renderMissList();
+      els.modeTag.textContent = state.mode === "reading" ? "ふりがな入力" : "漢字4択";
+      els.groupTag.textContent = GROUP_LABELS[state.range];
+
+      if (!state.queue.length) {
+        renderEmptyQueue();
+        return;
+      }
+
+      if (state.index >= state.queue.length) {
+        renderCompletion();
+        return;
+      }
+
+      const item = state.queue[state.index];
+      state.isAnswered = false;
+      els.questionCounter.textContent = `${state.index + 1} / ${state.queue.length}`;
+      els.progressBar.style.width = `${Math.round((state.index / state.queue.length) * 100)}%`;
+      els.feedback.className = "feedback";
+      els.feedback.innerHTML = `<span>${item.id}番</span><strong>${item.label}</strong>`;
+      els.nextButton.textContent = "次へ";
+
+      if (state.mode === "reading") {
+        renderReadingQuestion(item);
+      } else {
+        renderChoiceQuestion(item);
+      }
+    }
+
+    function renderEmptyQueue() {
+      els.questionCounter.textContent = "0 / 0";
+      els.progressBar.style.width = "0%";
+      els.promptLine.innerHTML = "";
+      els.choiceArea.classList.add("hidden");
+      els.readingForm.classList.add("hidden");
+      els.nextButton.classList.add("hidden");
+      els.feedback.className = "feedback";
+      els.feedback.innerHTML = `<span class="empty">出題できる問題がありません。</span>`;
+    }
+
+    function renderCompletion() {
+      const total = state.queue.length;
+      const percent = total ? Math.round((state.correct / total) * 100) : 0;
+      els.questionCounter.textContent = `${total} / ${total}`;
+      els.progressBar.style.width = "100%";
+      els.choiceArea.classList.add("hidden");
+      els.readingForm.classList.add("hidden");
+      els.nextButton.classList.add("hidden");
+      els.feedback.className = "feedback";
+      els.feedback.innerHTML = `<span>完了</span><strong>${state.correct} / ${total}</strong>`;
+      els.promptLine.innerHTML = `
+        <div class="completion">
+          <h2>結果</h2>
+          <div class="completion-score">${percent}%</div>
+          <div>${state.correct}問正解 / ${total}問中</div>
+          <button class="primary-button" type="button" id="againButton">もう一度</button>
+        </div>
+      `;
+      document.getElementById("againButton").addEventListener("click", resetQuiz);
+    }
+
+    function renderChoiceQuestion(item) {
+      els.choiceArea.classList.remove("hidden");
+      els.readingForm.classList.add("hidden");
+      els.nextButton.classList.remove("hidden");
+      els.promptLine.innerHTML = renderBlankSentence(item);
+      state.currentOptions = buildOptions(item);
+      els.choiceArea.innerHTML = state.currentOptions.map((option) => {
+        return `<button class="option-button" type="button" data-answer="${escapeAttr(option)}">${escapeHtml(option)}</button>`;
+      }).join("");
+
+      els.choiceArea.querySelectorAll(".option-button").forEach((button) => {
+        button.addEventListener("click", () => checkChoice(item, button));
+      });
+    }
+
+    function renderReadingQuestion(item) {
+      els.choiceArea.classList.add("hidden");
+      els.readingForm.classList.remove("hidden");
+      els.nextButton.classList.remove("hidden");
+      els.promptLine.innerHTML = renderKanjiSentence(item);
+      els.readingInput.value = "";
+      els.readingInput.disabled = false;
+      els.readingForm.querySelector("button").disabled = false;
+      setTimeout(() => els.readingInput.focus(), 0);
+    }
+
+    function renderBlankSentence(item) {
+      return `${escapeHtml(item.prefix)}<ruby><span class="blank-target">${escapeHtml(item.target)}</span><rt>${escapeHtml(item.reading)}</rt></ruby>${escapeHtml(item.suffix)}`;
+    }
+
+    function renderKanjiSentence(item) {
+      return `${escapeHtml(item.prefix)}<span class="kanji-target">${escapeHtml(item.target)}</span>${escapeHtml(item.suffix)}`;
+    }
+
+    function buildOptions(item) {
+      const pool = KANJI_ITEMS
+        .filter((candidate) => candidate.group === item.group && candidate.id !== item.id)
+        .map((candidate) => candidate.target);
+      return shuffle([item.target, ...shuffle(pool).slice(0, 3)]);
+    }
+
+    function checkChoice(item, button) {
+      if (state.isAnswered) return;
+      state.isAnswered = true;
+      state.answered += 1;
+      const answer = button.dataset.answer;
+      const correct = answer === item.target;
+      if (correct) {
+        state.correct += 1;
+        state.misses.delete(item.id);
+      } else {
+        state.misses.add(item.id);
+      }
+      saveMisses();
+      els.choiceArea.querySelectorAll(".option-button").forEach((optionButton) => {
+        const value = optionButton.dataset.answer;
+        optionButton.disabled = true;
+        if (value === item.target) optionButton.classList.add("correct");
+        if (optionButton === button && !correct) optionButton.classList.add("wrong");
+      });
+      showFeedback(item, correct, answer);
+      updateScore();
+      renderMissList();
+    }
+
+    function checkReading() {
+      if (state.isAnswered || state.index >= state.queue.length) return;
+      const item = state.queue[state.index];
+      const answer = els.readingInput.value;
+      const correct = normalizeKana(answer) === normalizeKana(item.reading);
+      state.isAnswered = true;
+      state.answered += 1;
+      if (correct) {
+        state.correct += 1;
+        state.misses.delete(item.id);
+      } else {
+        state.misses.add(item.id);
+      }
+      saveMisses();
+      els.readingInput.disabled = true;
+      els.readingForm.querySelector("button").disabled = true;
+      showFeedback(item, correct, answer || "未入力");
+      updateScore();
+      renderMissList();
+    }
+
+    function showFeedback(item, correct, answer) {
+      els.feedback.className = `feedback ${correct ? "good" : "bad"}`;
+      const mark = correct ? "正解" : "確認";
+      els.feedback.innerHTML = `
+        <span>${mark}: <strong>${escapeHtml(item.target)}</strong> / ${escapeHtml(item.reading)}</span>
+        <span>入力: ${escapeHtml(answer)}</span>
+      `;
+    }
+
+    function updateScore() {
+      els.scoreCorrect.textContent = state.correct;
+      els.scoreAnswered.textContent = state.answered;
+      els.scoreTotal.textContent = state.queue.length || getItemsForRange(state.range).length;
+      els.scoreMisses.textContent = state.misses.size;
+      const hasMisses = state.misses.size > 0;
+      els.missOnlyButton.disabled = !hasMisses;
+      els.clearMissesButton.disabled = !hasMisses;
+    }
+
+    function renderMissList() {
+      const misses = KANJI_ITEMS.filter((item) => state.misses.has(item.id));
+      if (!misses.length) {
+        els.missList.innerHTML = `<div class="empty">ミスはありません。</div>`;
+        return;
+      }
+      els.missList.innerHTML = misses.map((item) => `
+        <div class="miss-item">
+          <div>${item.id}番 <b>${escapeHtml(item.target)}</b> <span>${escapeHtml(item.reading)}</span></div>
+          <div>${escapeHtml(item.prefix)}${escapeHtml(item.target)}${escapeHtml(item.suffix)}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderStudyList() {
+      const range = els.studyRangeSelect.value;
+      const items = getItemsForRange(range);
+      if (!items.length) {
+        els.studyList.innerHTML = `<div class="empty">表示できる問題がありません。</div>`;
+        return;
+      }
+      els.studyList.innerHTML = items.map((item) => `
+        <article class="study-item">
+          <div class="study-main">
+            <span class="study-word">${item.id}. ${escapeHtml(item.target)}</span>
+            <span class="study-reading">${escapeHtml(item.reading)}</span>
+          </div>
+          <div class="study-sentence">${escapeHtml(item.prefix)}<strong>${escapeHtml(item.target)}</strong>${escapeHtml(item.suffix)}</div>
+        </article>
+      `).join("");
+    }
+
+    function shuffle(items) {
+      const copy = [...items];
+      for (let i = copy.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function normalizeKana(value) {
+      return value
+        .trim()
+        .normalize("NFKC")
+        .replace(/\s+/g, "")
+        .replace(/[ァ-ヶ]/g, (char) => String.fromCharCode(char.charCodeAt(0) - 0x60));
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function escapeAttr(value) {
+      return escapeHtml(value);
+    }
+
+    window.runKanjiAppSelfTests = function runKanjiAppSelfTests() {
+      const ids = new Set(KANJI_ITEMS.map((item) => item.id));
+      const readings = KANJI_ITEMS.filter((item) => item.reading && item.target && item.prefix !== undefined && item.suffix !== undefined);
+      const optionSizes = KANJI_ITEMS.map((item) => new Set(buildOptions(item)).size);
+      console.assert(KANJI_ITEMS.length === 50, "50 items are required");
+      console.assert(ids.size === 50, "item ids must be unique");
+      console.assert(readings.length === 50, "each item needs target, reading, prefix and suffix");
+      console.assert(optionSizes.every((size) => size === 4), "each choice question needs 4 unique options");
+      console.assert(normalizeKana("カナラズ") === "かならず", "katakana should normalize to hiragana");
+      return {
+        count: KANJI_ITEMS.length,
+        ids: ids.size,
+        optionSizes
+      };
+    };
+
+    resetQuiz();
+  </script>
+</body>
+</html>
